@@ -15,7 +15,7 @@ tf.random.set_random_seed(118)
 
 flags = tf.flags
 FLAGS = flags.FLAGS
-
+''' commented these out due to DuplicateFlagException from importing this and run_reranking
 ## Required parameters
 flags.DEFINE_string(
     "trec_run_filename", None,
@@ -100,7 +100,7 @@ flags.DEFINE_integer(
     "max_num_segments_perdoc", 8,
     "The maximum number of segments for each document"
 )
-
+'''
 
 class PointwiseInstance(object):
   """A single training instance (sentence pair)."""
