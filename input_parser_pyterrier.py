@@ -1,7 +1,8 @@
 
 import tensorflow.compat.v1 as tf
+import pandas as pd
 
-def input_fn_builder(dataset_df, is_training, max_num_segments_perdoc, max_seq_length):
+def input_fn_builder(dataset_path, is_training, max_num_segments_perdoc, max_seq_length):
   """Creates an `input_fn` closure to be passed to TPUEstimator."""
 
   def input_fn(params):
@@ -49,9 +50,8 @@ def input_fn_builder(dataset_df, is_training, max_num_segments_perdoc, max_seq_l
         sample[key] = tf.cast(sample[key], tf.int32)
 
       return sample
-
-
-    dataset = dataset_tf
+    
+    dataset = tf.data.TFRecordDataset(dataset_path)
     dataset = dataset.map(
         extract_fn, num_parallel_calls=4).prefetch(output_buffer_size)
 
