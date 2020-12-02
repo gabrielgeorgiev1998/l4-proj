@@ -51,7 +51,9 @@ def input_fn_builder(dataset_path, is_training, max_num_segments_perdoc, max_seq
       return sample
 
 
-    dataset = tf.data.TFRecordDataset(dataset_path)
+    print("DATASET")
+    dataset = tf.data.TFRecordDataset(tf.data.Dataset.from_tensor_slices([dataset_path]))
+    print(dataset)
     dataset = dataset.map(
         extract_fn, num_parallel_calls=4).prefetch(output_buffer_size)
 
